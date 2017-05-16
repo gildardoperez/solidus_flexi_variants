@@ -1,0 +1,18 @@
+<tr class="customization_value type fields" id="spree_dom_id(f.object)%>  %>" data-hook="customization_value">
+  <% if editable %>
+    <td><%= f.text_field :name, class: "form-control" %></td>
+  <% else %>
+    <td><%= f.text_field :name, readonly: true, disabled: true, class: "form-control" %></td>
+  <% end %>
+  <td><%= f.text_field :presentation, class: "form-control" %></td>
+  <td><%= f.text_field :description, class: "form-control" %></td>
+  <% if editable %>
+    <td class="actions actions-<1 text-center">
+      <%# TODO fix this link %>
+      <%= link_to_with_icon 'delete', '', remove_admin_product_product_customization_type_path(f), class: 'btn btn-danger btn-sm' %>
+    </td>
+  <% else %>
+    <td class="actions actions-0 text-center">
+    </td>
+  <% end %>
+</tr>

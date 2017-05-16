@@ -1,0 +1,13 @@
+<tr class="option_value fields" id="<%= spree_dom_id(f.object) %>">
+  <td class='name move-handle'>
+    <span class="icon icon-move handle"></span>
+    <span> <%= f.object.option_value.name %></span>
+  </td>
+  <td class='presentation'><span><%= f.object.option_value.presentation %> </span></td>
+  <td class='price_modifier'><%= f.text_field :price_modifier, class: 'form-control' %></td>
+  <td class='cost_price_modifier'><%= f.text_field :cost_price_modifier, class: 'form-control' %></td>
+  <td class='selected'><%= f.check_box :selected, class: 'form-control' %></td>
+  <td class="actions actions-1 text-right">
+    <%= link_to_delete f.object, { no_text: true, url: admin_product_ad_hoc_option_type_ad_hoc_option_value_path(@product, @ad_hoc_option_type) } %>
+  </td>
+</tr>

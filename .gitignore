@@ -1,0 +1,17 @@
+\#*
+*~
+.#*
+.DS_Store
+.idea
+.project
+tmp
+nbproject
+*.swp
+doc/notes.txt
+Gemfile.lock
+spec/dummy
+
+
+coverage/
+.ruby-version
+.ruby-gemset

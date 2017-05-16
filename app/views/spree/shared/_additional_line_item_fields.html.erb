@@ -1,0 +1,41 @@
+<div class='customizations'>
+  <%# TODO: group multi-select options (e.g. toppings) %>
+  <div class='list-group list-unstyled'>
+    <% item.ad_hoc_option_values.each do |ad_hoc_option_value| %>
+      <div class="ad-hoc-option-value">
+      <%#= ad_hoc_option_value.option_value.option_type.presentation %>
+      <%= ad_hoc_option_value.option_value.presentation %>
+      </div>
+    <% end %>
+    <% item.product_customizations.each do |customization| %>
+      <% next if customization.customized_product_options.all? {|customized_product_option| customized_product_option.empty? } %>
+      <div class="product-customization-type-presentation">
+      <%#= customization.product_customization_type.presentation %>
+      </div>
+        <div class="customized-product-options">
+          <% customization.customized_product_options.each do |option| %>
+            <% next if option.empty? %>
+            <% partial = option.customizable_product_option.name %>
+            <% lookup = ActionView::LookupContext.new(ActionController::Base.view_paths, {formats: [:html]}) %>
+            <% if lookup.exists?("spree/orders/custom_fields/#{partial}", nil, true) %>
+              <%= render partial: "spree/orders/custom_fields/#{partial}", locals: {option: option} %>
+            <% else %>
+              <% if option.customization_image? %>
+                <div class="customized-image"><%= link_to image_tag(option.customization_image.print.url), option.customization_image.url, target: '_blank', class: 'custom-original-image-upload' %></div>
+              <% else %>
+                <div class='customized-option-value'>
+                <%#= option.customizable_product_option.presentation %>
+                <img src="<%= option.value %>" class="custom-cropped-image-value"></div>
+              <% end %>
+            <% end %>
+          <% end %> <%# each option %>
+        </div>
+    <% end %> <%# each customization %>
+  </div>
+</div>
+<style>
+  a.custom-original-image-upload img {
+    width: 300px;
+    height: 300px;
+}
+</style>

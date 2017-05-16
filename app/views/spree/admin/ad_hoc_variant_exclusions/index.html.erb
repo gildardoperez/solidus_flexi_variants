@@ -1,0 +1,57 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: "Ad Hoc Variant Exclusions" } %>
+<% admin_breadcrumb(plural_resource_name(Spree::AdHocVariantExclusion)) %>
+
+<h3><%= Spree.t("ad_hoc_variant_exclusions") %></h3>
+
+<% if @product.ad_hoc_option_types.size >= 2 %>
+  <% content_for(:page_actions) do %>
+    <li>
+      <%= button_link_to Spree.t("new_ad_hoc_variant_exclusion"), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), remote: true, class: 'btn-success', icon: 'plus', id: 'new_ad_hoc_variant_exclusion_link' %>
+    </li>
+  <% end %>
+
+  <div id="new_ad_hoc_variant_exclusion"></div>
+  <% if @product.ad_hoc_variant_exclusions.any? %>
+    <table class="index table sortable" id='listing_ad_hoc_variant_exclusions'>
+      <% sorted_option_types = @product.ad_hoc_option_types.sort {|x,y| x.presentation <=> y.presentation} %>
+      <thead>
+        <tr>
+          <% sorted_option_types.each do |option_type| %>
+            <th>
+              <%= Spree.t("option_value") %> for <%= Spree.t("option_type")%> <%= option_type.presentation %>
+            </th>
+          <% end %>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%# each exclusion row has one column per option type %>
+        <% @product.ad_hoc_variant_exclusions.each do |ad_hoc_variant_exclusion| %>
+          <tr id="<%= spree_dom_id(ad_hoc_variant_exclusion) %>">
+            <%# account for every option type, even if empty %>
+            <% sorted_option_types.each do |option_type| %>
+              <%# find the exclusion option_value associated w/ this option_type, if any %>
+              <% option_value = ad_hoc_variant_exclusion.excluded_ad_hoc_option_values.detect { |eov| eov.ad_hoc_option_value.option_type == option_type } %>
+              <td>
+                <%= option_value.nil? ? "all" : option_value.ad_hoc_option_value.name %>
+              </td>
+            <% end # sorted_option_types.each %>
+            <td class="actions actions-1 text-right">
+              <%= link_to_delete ad_hoc_variant_exclusion, { url: admin_product_ad_hoc_variant_exclusion_url(@product, ad_hoc_variant_exclusion), no_text: true } %>
+            </td>
+          </tr>
+        <% end # each exclusion %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alert alert-info no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::AdHocVariantExclusion)) %>,
+      <%= link_to Spree.t(:add_one), spree.new_admin_product_ad_hoc_variant_exclusion_url(@product), remote: true %>!
+    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%=Spree.t(:ad_hoc_variant_exclusions_unavailable) %>,
+    <%= link_to Spree.t(:add_one), spree.admin_product_ad_hoc_option_types_url(@product) %>!
+  </div>
+<% end %>
