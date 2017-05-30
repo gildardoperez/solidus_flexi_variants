@@ -9,9 +9,9 @@
     <% end %>
     <% item.product_customizations.each do |customization| %>
       <% next if customization.customized_product_options.all? {|customized_product_option| customized_product_option.empty? } %>
-      <div class="product-customization-type-presentation">
+
       <%#= customization.product_customization_type.presentation %>
-      </div>
+
         <div class="customized-product-options">
           <% customization.customized_product_options.each do |option| %>
             <% next if option.empty? %>
@@ -21,7 +21,7 @@
               <%= render partial: "spree/orders/custom_fields/#{partial}", locals: {option: option} %>
             <% else %>
               <% if option.customization_image? %>
-                <div class="customized-image"><%= link_to image_tag(option.customization_image.print.url), option.customization_image.url, target: '_blank', class: 'custom-original-image-upload' %></div>
+                <div class="customized-image"><%= link_to image_tag(option.customization_image.thumb.url), option.customization_image.large.url, target: '_blank', class: 'custom-original-image-upload' %></div>
               <% else %>
                 <div class='customized-option-value'>
                 <%#= option.customizable_product_option.presentation %>
@@ -34,8 +34,6 @@
   </div>
 </div>
 <style>
-  a.custom-original-image-upload img {
-    width: 300px;
-    height: 300px;
-}
+  .customized-image {margin-top: -75px;}
+  a.custom-original-image-upload img {}
 </style>

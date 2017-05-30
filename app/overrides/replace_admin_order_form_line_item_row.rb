@@ -15,6 +15,6 @@ Deface::Override.new(
 Deface::Override.new(
   virtual_path: "spree/admin/orders/_shipment_manifest",
   name: "add_additional_line_item_fields_partial_to_admin_shipment_manifest",
-  insert_bottom: ".item-name",
+  insert_bottom: ".item-image",
   text: "<%= render partial: 'spree/shared/additional_line_item_fields', locals: { item: item.line_item } %>"
 )
