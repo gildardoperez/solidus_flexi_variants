@@ -24,6 +24,10 @@ module Spree
     #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
     # end
 
+    version :square do
+      process resize_to_limit: [600, 600]
+    end
+
     version :thumb do
       process resize_to_fill: [75, 75]
     end
