@@ -24,7 +24,7 @@
                 <div class="customized-image"><%= link_to image_tag(option.customization_image.thumb.url), option.customization_image.large.url, target: '_blank', class: 'custom-original-image-upload' %></div>
               <% else %>
                 <div class='customized-option-value'>
-                <%#= option.customizable_product_option.presentation %>
+                <%= option.customizable_product_option.presentation %>
                 <img src="<%= option.value %>" class="custom-cropped-image-value"></div>
               <% end %>
             <% end %>

@@ -3,16 +3,15 @@
   <% lookup = ActionView::LookupContext.new(ActionController::Base.view_paths, {formats: [:html]}) %>
 
   <div id="product-customizations">
-    <div class= 'col-sm-12'>
+    <div class= 'col-sm-12 nopadding'>
       <h3 class="product-section-title">
-      <%=Spree.t(:customizations) %>
+      <%=Spree.t(:upload_your_digital_photo) %>
       </h3>
     </div>
     <ul class="list-group list-unstyled">
       <% @product.product_customization_types.group_by{ |x| calculator_name(x) }.each do |product_customization_grouped_by_calc_type| %>
         <% product_clac_name, product_customization_type_group = product_customization_grouped_by_calc_type %>
-        <div class='col-sm-12'>
-          <legend><%#= product_customization_type_group.first.presentation %></legend>
+        <div class='col-sm-12 nopadding'>
         </div>
         <% product_customization_type_group.each do |product_customization_type| %>
           <%# render a custom partial based on the customization name? %>
@@ -41,7 +40,7 @@
             <% end %> <%# lookup.exists? %>
           <% end %> <%# lookup.exists? %>
         <% end %> <%# each product_customization_type %>
-        <div class='col-sm-12'></div>
+        <div class='col-sm-12 nopadding'></div>
       <% end %> <%# each product_customization_grouped_by_calc_type %>
     </ul>
   </div> <!-- product-customizations -->
