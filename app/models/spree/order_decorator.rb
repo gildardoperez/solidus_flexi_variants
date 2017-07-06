@@ -29,6 +29,6 @@ Spree::Order.class_eval do
     existing_ad_hoc_opt_vals = line_item.ad_hoc_option_values || []
     new_ad_hoc_opt_vals = options[:ad_hoc_option_values] || []
 
-    existing_ad_hoc_opt_vals.map(&:id).sort == new_ad_hoc_opt_vals.map(&:to_i).sort
+    existing_ad_hoc_opt_vals.try(&:id).sort == new_ad_hoc_opt_vals.map(&:to_i).sort
   end
 end
