@@ -20,7 +20,7 @@ I have only tested with V2.0, unsure if compatible with other versions as of yet
 ##Installation
 
     # see the notes in Versionfile if you are using an older version of spree
-    gem 'solidus_flexi_variants', github: 'boomerdigital/solidus_flexi_variants', branch: 'master'
+    gem 'solidus_flexi_variants', :git => 'https://github.com/gildardoperez/solidus_flexi_variants.git', branch: 'master'
 
     bundle install
 
